@@ -16,7 +16,7 @@ const { SECRET_KEY } = process.env;
 
 const authenticate = async (req, res, next) => {
   try {
-    const { authorization } = req.headers;
+    const { authorization = "" } = req.headers;
     const [bearer = "", token = ""] = authorization.split(" ");
     if (bearer !== "Bearer") {
       throw RequestError(401);
@@ -27,6 +27,7 @@ const authenticate = async (req, res, next) => {
       if (!user) {
         throw Error("Unauthorized");
       }
+      req.user = user;
       next();
     } catch (error) {
       throw RequestError(401, error.message);
