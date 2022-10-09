@@ -8,7 +8,14 @@ const getAll = async (req, res) => {
     skip,
     limit,
   }).populate("owner", "name email");
-  res.json(result);
+
+  res.json({
+    status: "success",
+    code: 200,
+    data: {
+      result,
+    },
+  });
 };
 
 module.exports = getAll;
