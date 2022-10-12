@@ -17,4 +17,6 @@ router.get("/logout", authenticate, ctrlWrapper(ctrl.logout));
 
 // router.patch("/", authenticate, ctrlWrapper(ctrl.updateSubscription));
 
+router.patch("/avatars", authenticate, ctrlWrapper(ctrl.updateAvatar));
+
 module.exports = router;
