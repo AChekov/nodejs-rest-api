@@ -4,7 +4,7 @@ const { v4 } = require("uuid");
 
 const { User, schemas } = require("../../models/user");
 
-const { RequestError } = require("../../helpers");
+const { RequestError, sendEmail, createVerifyEmail } = require("../../helpers");
 
 const signup = async (req, res) => {
   const { error } = schemas.registerSchema.validate(req.body);
@@ -26,6 +26,10 @@ const signup = async (req, res) => {
     avatarURL,
     verificationToken,
   });
+
+  const mail = createVerifyEmail(email, verificationToken);
+
+  await sendEmail(mail);
 
   res.status(201).json({
     name: result.name,
