@@ -30,6 +30,7 @@ const signup = async (req, res) => {
   res.status(201).json({
     name: result.name,
     subscription: result.subscription,
+    verificationToken: result.verificationToken,
   });
 };
 
